@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@test-nx-next/markdown": ["libs/markdown/src/index.ts"]
+      "@test-nx-next/markdown": ["libs/markdown/src/index.ts"],
+      "@test-nx-next/shared/mdx-elements": [
+        "libs/shared/mdx-elements/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

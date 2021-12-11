@@ -7,11 +7,17 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
+import { CustomLink, Youtube } from '@test-nx-next/shared/mdx-elements';
 
 /* eslint-disable-next-line */
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
+
+const mdxElements = {
+  Youtube,
+  a: CustomLink,
+};
 
 const POSTS_PATH = join(process.cwd(), '_articles');
 
@@ -22,7 +28,7 @@ export function Article({ frontMatter, html }: ArticleProps) {
         <h1>{frontMatter.title}</h1>
         <div>by {frontMatter.author.name}</div>
         <hr />
-        <MDXRemote {...html} />
+        <MDXRemote {...html} components={mdxElements} />
       </article>
     </div>
   );
