@@ -7,7 +7,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
-import { CustomLink, Youtube } from '@test-nx-next/shared/mdx-elements';
+import dynamic from 'next/dynamic';
 
 /* eslint-disable-next-line */
 export interface ArticleProps extends ParsedUrlQuery {
@@ -15,8 +15,14 @@ export interface ArticleProps extends ParsedUrlQuery {
 }
 
 const mdxElements = {
-  Youtube,
-  a: CustomLink,
+  Youtube: dynamic(async () => {
+    return await import('@test-nx-next/shared/mdx-elements/youtube/youtube');
+  }),
+  a: dynamic(async () => {
+    return await import(
+      '@test-nx-next/shared/mdx-elements/custom-link/custom-link'
+    );
+  }),
 };
 
 const POSTS_PATH = join(process.cwd(), '_articles');
