@@ -9,7 +9,6 @@ import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
 import dynamic from 'next/dynamic';
 
-/* eslint-disable-next-line */
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -27,7 +26,7 @@ const mdxElements = {
 
 const POSTS_PATH = join(process.cwd(), process.env.articleMarkdownPath);
 
-export function Article({ frontMatter, html }: ArticleProps) {
+export function Article({ frontMatter, html }) {
   return (
     <div className="m-6">
       <article className="prose prose-lg">
@@ -40,7 +39,7 @@ export function Article({ frontMatter, html }: ArticleProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<ArticleProps> = async ({
+export const getStaticProps: GetStaticProps = async ({
   params,
 }: {
   params: ArticleProps;
@@ -53,7 +52,7 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
   };
 };
 
-export const getStaticPaths: GetStaticPaths<ArticleProps> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = readdirSync(POSTS_PATH)
     .map((path) => path.replace(/\.mdx?/, ''))
     .map((slug) => ({ params: { slug } }));
